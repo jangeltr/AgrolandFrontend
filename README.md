@@ -17,4 +17,5 @@ Solo clona el proyecto con "git clone https://github.com/jangeltr/AgrolandFronte
 Entra en la carpeta e instala las dependencias
 
 cd AgrolandFrontend
+
 npm install 
