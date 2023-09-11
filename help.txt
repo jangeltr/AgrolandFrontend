@@ -35,3 +35,12 @@ npm install react-hook-form@latest
 ////Para poder usar la API de Google Maps
 npm i -S @react-google-maps/api
 npm i -D @types/google.maps
+
+
+////iniciar Git
+git init
+git remote add origin git@github.com:jangeltr/AgrolandFrontend.git
+//Editar README.md
+git add .
+git commit -m "Commit inicial"
+git push origin main
