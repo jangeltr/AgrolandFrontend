@@ -1,0 +1,37 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+npm create vite@latest
+cd my-project
+npm install 
+
+////
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+////tailwind.config.cjs
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+////App.css, solo debe tener estas 3 lineas
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+////index.css, debe quedar en blanco
+
+////Para ruteo
+npm install react-router-dom@latest
+
+////Para uso de formularios
+npm install react-hook-form@latest
+
+////Para poder usar la API de Google Maps
+npm i -S @react-google-maps/api
+npm i -D @types/google.maps
