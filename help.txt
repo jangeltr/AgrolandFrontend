@@ -10,8 +10,8 @@ npx tailwindcss init -p
 ////tailwind.config.cjs
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{html,js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {},
@@ -37,10 +37,18 @@ npm i -S @react-google-maps/api
 npm i -D @types/google.maps
 
 
-////iniciar Git
+////iniciar el proyecto
+//Crear un proyecto en blanco en Github
 git init
+git remote add origin 'Ruta del repositorio obtenida de github'
+//en mi caso
 git remote add origin git@github.com:jangeltr/AgrolandFrontend.git
 //Editar README.md
+//Crear la estructura del proyecto agregando las sub-carpetas a la carpeta "src"
+-Common
+-Components
+-Context
+-Pages
 git add .
 git commit -m "Commit inicial"
 git push origin main
