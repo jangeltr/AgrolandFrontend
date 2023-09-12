@@ -52,3 +52,7 @@ git remote add origin git@github.com:jangeltr/AgrolandFrontend.git
 git add .
 git commit -m "Commit inicial"
 git push origin main
+
+//Para agregar algunos componentes de React del sitio de componentes de tailwindcss
+ npm install @headlessui/react
+ npm install @heroicons/react
