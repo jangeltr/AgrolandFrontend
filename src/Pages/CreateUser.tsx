@@ -1,9 +1,7 @@
-
-
-export default function Home() {
+export default function CreateUser() {
     return (
         <div className=" ">
-            Estas en Home
+            Crear Usuario
         </div>
     )
 }

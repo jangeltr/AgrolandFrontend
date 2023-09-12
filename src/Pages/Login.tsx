@@ -1,9 +1,7 @@
-
-
-export default function Home() {
+export default function Login() {
     return (
         <div className=" ">
-            Estas en Home
+            Iniciar Sesion
         </div>
     )
 }

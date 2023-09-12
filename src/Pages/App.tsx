@@ -4,30 +4,34 @@ import { useContext } from 'react';
 
 import { MyContext } from '../Context/context';
 import Layout from '../Components/Layout'
-import { Home } from './Home';
+import Home from './Home';
+import Login from './Login';
+import CreateUser from './CreateUser';
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
-
+        { path: '/', element: <Home />},
     ])
     return routes
 }
 
 const AppRoutesNormalUser = () => {
     const routes = useRoutes([
-
+        { path: '/', element: <Home />},
     ])
     return routes
 }
 
 const AppRoutesWithoutUser = () => {
     const routes = useRoutes([
-
+        { path: '/', element: <Home />},
+        { path: '/login', element: <Login />},
+        { path: '/createUser', element: <CreateUser />}
     ])
     return routes
 }
 
-function App() {
+export default function App() {
     const contexto = useContext(MyContext)
     function enrutar(){
         if (contexto?.data.user===null) {
@@ -44,12 +48,9 @@ function App() {
         <>
             <BrowserRouter>
                 <Layout>
-                        {enrutar()}
-                        <Home />
+                    {enrutar()}
                 </Layout>
             </BrowserRouter>
         </>
     )
 }
-
-export default App
