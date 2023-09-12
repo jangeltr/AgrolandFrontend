@@ -7,10 +7,9 @@ const Footer = (): JSX.Element => {
                 <div className="lg:flex lg:items-start lg:justify-between">
                     <div>
                         <div className="flex justify-center text-teal-600 lg:justify-start">
-                            <img className="h-10 w-auto rounded-lg" src="../../../public/Siembra5.jpg" alt="Logo"/>
-                            <span className=" text-xl font-bold ml-10 mt-1">Agroland</span>                
+                            <span className=" text-2xl font-bold">Agroland</span>                
                         </div>
-                        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 lg:text-left">
+                        <p className="mx-auto mt-5 max-w-md text-center leading-relaxed text-gray-500 lg:text-left">
                             Desarrollado para el registro y consulta de terrenos cultivados en Mexico.
                         </p>
                     </div>
