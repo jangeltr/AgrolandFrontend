@@ -1,9 +1,7 @@
-'use client'
-
-const Footer = (): JSX.Element => {
+export default function Footer(): JSX.Element {
     return (
-        <div className="  bg-slate-800">
-            <div className="relative mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className=" bg-slate-800">
+            <div className="relative mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-5">
                 <div className="lg:flex lg:items-start lg:justify-between">
                     <div>
                         <div className="flex justify-center text-teal-600 lg:justify-start">
@@ -16,27 +14,24 @@ const Footer = (): JSX.Element => {
                     <div className=" flex-col">
                         <ul className="mt-10 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
                             <li>
-                            <a className="text-gray-500 transition hover:text-gray-700/75" href="/">
-                                Acerca de
-                            </a>
+                                <a className="text-gray-500 transition hover:text-gray-700/75" href="/">
+                                    Acerca de
+                                </a>
                             </li>
-
                             <li>
-                            <a className="text-gray-500 transition hover:text-gray-700/75" href="/">
-                                Servicios
-                            </a>
+                                <a className="text-gray-500 transition hover:text-gray-700/75" href="/">
+                                    Servicios
+                                </a>
                             </li>
-
                             <li>
-                            <a className="text-gray-500 transition hover:text-gray-700/75" href="/">
-                                Proyectos
-                            </a>
+                                <a className="text-gray-500 transition hover:text-gray-700/75" href="/">
+                                    Proyectos
+                                </a>
                             </li>
-
                             <li>
-                            <a className="text-gray-500 transition hover:text-gray-700/75" href="http://www.tlajomulco.tecnm.mx/">
-                                TecNM-Tlajomulco
-                            </a>
+                                <a className="text-gray-500 transition hover:text-gray-700/75" href="http://www.tlajomulco.tecnm.mx/">
+                                    TecNM-Tlajomulco
+                                </a>
                             </li>
                         </ul>
                         <p className="mt-10 text-center text-sm text-gray-500 lg:text-right">
@@ -45,9 +40,6 @@ const Footer = (): JSX.Element => {
                     </div>
                 </div>
             </div>
-            
         </div>
     )
 }
-
-export default Footer
