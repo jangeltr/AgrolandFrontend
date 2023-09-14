@@ -4,9 +4,6 @@ import { User } from "../Common/UserType"
 
 type Data = {
     apiGoogleMapsToken?: string
-    logedUser?: boolean
-    loginForm?: boolean
-    createUserForm?: boolean
     user?: User | null
 }
 
@@ -17,9 +14,6 @@ interface MyContextType {
 
 const inicioEstado: Data = {
     apiGoogleMapsToken: '',
-    logedUser: false, 
-    loginForm: false, 
-    createUserForm: false,
     user: null,
 }
 

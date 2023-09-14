@@ -23,9 +23,11 @@ export default function Login(): JSX.Element {
         <>
             <div className=' w-full flex justify-center'>
                 <div className="flex-col text-gray-800 mt-5">
-                    <span className=' text-xl border-b-2 p-2 border-gray-700'>
-                        Proporciona los datos para ingresar
-                    </span>
+                    <div className='flex justify-center'>
+                        <span className=' text-xl border-b-2 p-2 border-gray-700'>
+                            Proporciona los datos para ingresar
+                        </span>
+                    </div>
                     <form onSubmit={onSubmit} className=' mt-8 mb-5'>
                         <div className=' mb-5'>
                             <label className="block text-principal">Tu email</label>

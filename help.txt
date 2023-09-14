@@ -36,6 +36,8 @@ npm install react-hook-form@latest
 npm i -S @react-google-maps/api
 npm i -D @types/google.maps
 
+////Para poder usar 'process.cwd()' y leer las variables de entorno del archivo '.env' dentro del archivo 'vite.config.ts' 
+npm i --save-dev @types/node
 
 ////iniciar el proyecto
 //Crear un proyecto en blanco en Github
