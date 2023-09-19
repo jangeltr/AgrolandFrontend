@@ -1,22 +1,57 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+import { User, UserLogin } from '../Common/UserType';
 import { MyContext } from '../Context/context';
 import { Success, Reject } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
-import { inputEmail, inputPassword } from '../Common/FormInputObjects';
+import { inputEmailLogin, inputPassword, inputUserNameLogin } from '../Common/FormInputObjects';
 
 export default function Login(): JSX.Element {
+    const navigate = useNavigate()
     const contexto = useContext(MyContext)
     const [showBienVenido, setShowBienVenido] = useState(false)
-    const [showErrorCrearCuenta, setShowErrorCrearCuenta] = useState(false)
-    const [showErrorCuentaYaExiste, setShowErrorCuentaYaExiste] = useState(false)
+    const [showErrorCuentaNoExiste, setShowErrorCuentaNoExiste] = useState(false)
     const [showErrorPassword, setShowErrorPassword] = useState(false)
     const [showSpinner, setShowSpinner] = useState(false)
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     
     const onSubmit = handleSubmit(async(data) => {
         setShowSpinner(true)
+        const usuario: UserLogin = {
+            userName: data.userName,
+            email: data.email,
+            password: data.password,
+        }
+        if (usuario.email==='') usuario.email='prueba@gmail.com'
+        const headersList = {
+            "Accept": "*/*",
+            "User-Agent": "Agroland",
+            "Content-Type": "application/json"
+        }
+        const bodyContent = JSON.stringify(usuario)
+        const URL = import.meta.env.VITE_AGROLAND_BACKEND_URL + '/usuarios/login'
+        const response = await fetch(URL, { 
+            method: "POST",
+            body: bodyContent,
+            headers: headersList
+        })
+        if (response.status===201) {
+            setShowSpinner(false)
+            setShowBienVenido(true)
+            const data: User = await response.json()
+            setTimeout(() => {
+                contexto?.updateData({user: data})
+                navigate('/home')
+            }, 2000);
+        }else if (response.status===400)
+            {   const res= await response.json()
+                if (typeof res.message=='string' && res.message.includes('no existe'))
+                    setShowErrorCuentaNoExiste(true)
+                else if (typeof res.message=='string' && res.message.includes('incorrecta'))
+                    setShowErrorPassword(true)
+            }
     })
 
     return (
@@ -25,14 +60,25 @@ export default function Login(): JSX.Element {
                 <div className="flex-col text-gray-800 mt-5">
                     <div className='flex justify-center'>
                         <span className=' text-xl border-b-2 p-2 border-gray-700'>
-                            Proporciona los datos para ingresar
+                            Proporciona tu "nombre de usuario o email" y "contraseña"
                         </span>
                     </div>
                     <form onSubmit={onSubmit} className=' mt-8 mb-5'>
-                        <div className=' mb-5'>
+                        <div className=' mt-5'>
+                            <label className="block text-principal">Nombre de usuario</label>
+                            <input type="text" className='h-8 w-full rounded-md text-center text-principal'
+                                {...register('userName',inputUserNameLogin)}
+                            />
+                            {
+                                errors.userName && <span className='text-red-500 text-xs'>{
+                                    typeof errors.userName?.message=='string' ? errors.userName?.message : ''
+                                }</span>
+                            }
+                        </div>
+                        <div className=' mt-5 mb-5'>
                             <label className="block text-principal">Tu email</label>
                             <input type="email" className='h-8 w-full rounded-md text-center text-principal' 
-                                {...register('email',inputEmail)}
+                                {...register('email',inputEmailLogin)}
                             />
                             {
                                 errors.email && <span className='text-red-500 text-xs'>{
@@ -60,10 +106,9 @@ export default function Login(): JSX.Element {
                 </div>
             </div>
             {showSpinner&& <MySpinner />}
-            <Success show={showBienVenido} title='Felicidades' text={'Tu cuenta se creo con exito'} setShow={setShowBienVenido}/>
-            <Reject show={showErrorCrearCuenta} title='Error al crear la cuenta' text='Faltan datos o alguno no cumple los requisitos' setShow={setShowErrorCrearCuenta}/>
-            <Reject show={showErrorCuentaYaExiste} title='Error al crear la cuenta' text='La cuenta de correo electronico ya existe' setShow={setShowErrorCuentaYaExiste}/>
-            <Reject show={showErrorPassword} title='Error al crear la cuenta' text='La contraseña no reune los requisitos minimos de seguridad' setShow={setShowErrorPassword}/>
+            <Success show={showBienVenido} title='Agroland' text={'Bienvenido'} setShow={setShowBienVenido}/>
+            <Reject show={showErrorCuentaNoExiste} title='Error al iniciar sesion' text='La cuenta no existe' setShow={setShowErrorCuentaNoExiste}/>
+            <Reject show={showErrorPassword} title='Error al iniciar sesion' text='Contraseña incorrecta' setShow={setShowErrorPassword}/>
         </>
     )
 }

@@ -1,13 +1,15 @@
-import { NavLink } from "react-router-dom"
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
+import { NavLink, useNavigate } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
+import { MyContext } from '../../Context/context';
+
 const navigation = [
-    { name: 'Cultivos', href: '#', current: true },
-    { name: 'Predios', href: '#', current: false },
-    { name: 'Usuarios', href: '#', current: false },
-    { name: 'Otros', href: '#', current: false },
+    { name: 'Cultivos', href: '/cultivos', current: true },
+    { name: 'Predios', href: '/predios', current: false },
+    { name: 'Usuarios', href: '/usuarios', current: false },
+    { name: 'Otros', href: '/otros', current: false },
 ]
 
 const userMenu = [
@@ -17,6 +19,8 @@ const userMenu = [
 ]
 
 export default function AdminUser() {
+    const navigate = useNavigate()
+    const contexto = useContext(MyContext)
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -37,9 +41,7 @@ export default function AdminUser() {
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <a href="/">
-                                        <img className="h-10 w-auto rounded-lg" src="../../../public/Siembra5.jpg" alt="Logo" />
-                                    </a>
+                                    <img className="h-10 w-auto rounded-lg" src="../../../public/Siembra5.jpg" alt="Logo" onClick={()=>{navigate('/home')}} />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
@@ -78,7 +80,15 @@ export default function AdminUser() {
                                             {
                                                 userMenu.map((item) => (
                                                     <Menu.Item key={item.name}>
-                                                        <a href={item.href} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200'>{item.name}</a>
+                                                        <a href={item.href} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200' 
+                                                            onClick={()=> {
+                                                                if (item.name=='Salir')
+                                                                    contexto?.updateData({user: null})
+                                                                    navigate('/')
+                                                            }}
+                                                        >
+                                                            {item.name}
+                                                        </a>
                                                     </Menu.Item>
                                                 ))
                                             }

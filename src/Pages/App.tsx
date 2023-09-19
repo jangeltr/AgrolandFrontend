@@ -7,10 +7,19 @@ import Layout from '../Components/Layout'
 import Home from './Home';
 import Login from './Login';
 import CreateUser from './CreateUser';
+import Cultivos from './Cultivos';
+import Predios from './Predios';
+import Usuarios from './Usuarios';
+import Otros from './Otros';
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
         { path: '/', element: <Home />},
+        { path: '/home', element: <Home />},
+        { path: '/cultivos', element: <Cultivos />},
+        { path: '/predios', element: <Predios />},
+        { path: '/usuarios', element: <Usuarios />},
+        { path: '/otros', element: <Otros />}
     ])
     return routes
 }
@@ -18,6 +27,9 @@ const AppRoutesAdminUser = () => {
 const AppRoutesNormalUser = () => {
     const routes = useRoutes([
         { path: '/', element: <Home />},
+        { path: '/home', element: <Home />},
+        { path: '/cultivos', element: <Cultivos />},
+        { path: '/predios', element: <Predios />}
     ])
     return routes
 }
@@ -25,6 +37,7 @@ const AppRoutesNormalUser = () => {
 const AppRoutesWithoutUser = () => {
     const routes = useRoutes([
         { path: '/', element: <Home />},
+        { path: '/home', element: <Home />},
         { path: '/login', element: <Login />},
         { path: '/createUser', element: <CreateUser />}
     ])

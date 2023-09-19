@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -8,6 +8,7 @@ const navigation = [
 ]
 
 export default function WithoutUser() {
+    const navigate=useNavigate()
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -28,13 +29,11 @@ export default function WithoutUser() {
                             </div>
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <a href="/">
-                                        <img
-                                            className="h-10 w-auto rounded-lg"
-                                            src="../../../public/Siembra5.jpg"
-                                            alt="Logo"
-                                        />
-                                    </a>
+                                    <img
+                                        className="h-10 w-auto rounded-lg"
+                                        src="../../../public/Siembra5.jpg"
+                                        alt="Logo"  onClick={()=>{navigate('/home')}}
+                                    />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">

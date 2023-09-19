@@ -3,7 +3,6 @@ import React from "react"
 import { User } from "../Common/UserType"
 
 type Data = {
-    apiGoogleMapsToken?: string
     user?: User | null
 }
 
@@ -13,7 +12,6 @@ interface MyContextType {
 }
 
 const inicioEstado: Data = {
-    apiGoogleMapsToken: '',
     user: null,
 }
 

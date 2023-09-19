@@ -1,15 +1,17 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { NewUser } from '../Common/UserType';
+import { NewUser, User } from '../Common/UserType';
 import { MyContext } from '../Context/context';
 import { Success, Reject } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
-import { inputEmail, inputPassword, inputNombre } from '../Common/FormInputObjects';
+import { inputEmail, inputPassword, inputNombre, inputUserName } from '../Common/FormInputObjects';
 
 
 export default function CreateUser(): JSX.Element {
     const contexto = useContext(MyContext)
+    const navigate = useNavigate()
     const [showBienVenido, setShowBienVenido] = useState(false)
     const [showErrorCrearCuenta, setShowErrorCrearCuenta] = useState(false)
     const [showErrorCuentaYaExiste, setShowErrorCuentaYaExiste] = useState(false)
@@ -20,9 +22,10 @@ export default function CreateUser(): JSX.Element {
     const onSubmit = handleSubmit(async(data) => {
         setShowSpinner(true)
         const usuario: NewUser = {
+            userName: data.userName,
             email: data.email,
             password: data.password,
-            name: data.nombre
+            nombre: data.nombre
         }
         const headersList = {
             "Accept": "*/*",
@@ -30,19 +33,23 @@ export default function CreateUser(): JSX.Element {
             "Content-Type": "application/json"
         }
         const bodyContent = JSON.stringify(usuario)
-        const URL = import.meta.env.VITE_AGROLAND_BACKEND_URL + '/users/add'
+        const URL = import.meta.env.VITE_AGROLAND_BACKEND_URL + '/usuarios/createuser'
         const response = await fetch(URL, { 
             method: "POST",
             body: bodyContent,
             headers: headersList
         });
-        //Al crear la cuenta se debe logear automaticamente y regresar datos del usuario incluyendo el token + el token de google maps
         if (response.status===201) {
             setShowSpinner(false)
             setShowBienVenido(true)
+            const data: User = await response.json()
+            setTimeout(() => {
+                contexto?.updateData({user: data})
+                navigate('/home')
+            }, 2000);
         }else if (response.status===400)
             {   const res= await response.json()
-                if (typeof res.message=='string' && res.message.includes('already exists'))
+                if (typeof res.message=='string' && res.message.includes('ya existen'))
                     setShowErrorCuentaYaExiste(true)
                 else if (typeof res.message=='object')
                         setShowErrorPassword(true)
@@ -99,13 +106,24 @@ export default function CreateUser(): JSX.Element {
                             }
                         </div>
                         <div className=' mt-5'>
+                            <label className="block text-principal">Nombre de usuario</label>
+                            <input type="text" className='h-8 w-full rounded-md text-center text-principal'
+                                {...register('userName',inputUserName)}
+                            />
+                            {
+                                errors.userName && <span className='text-red-500 text-xs'>{
+                                    typeof errors.userName?.message=='string' ? errors.userName?.message : ''
+                                }</span>
+                            }
+                        </div>
+                        <div className=''>
                             <label className="block text-principal">Nombre completo</label>
                             <input type="text" className='h-8 w-full rounded-md text-center text-principal'
                                 {...register('nombre',inputNombre)}
                             />
                             {
-                                errors.nombres && <span className='text-red-500 text-xs'>{
-                                    typeof errors.nombres?.message=='string' ? errors.nombres?.message : ''
+                                errors.nombre && <span className='text-red-500 text-xs'>{
+                                    typeof errors.nombre?.message=='string' ? errors.nombre?.message : ''
                                 }</span>
                             }
                         </div>
