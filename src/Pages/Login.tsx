@@ -7,6 +7,7 @@ import { MyContext } from '../Context/context';
 import { Success, Reject } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
 import { inputEmailLogin, inputPassword, inputUserNameLogin } from '../Common/FormInputObjects';
+import { loginUser } from '../Common/Users';
 
 export default function Login(): JSX.Element {
     const navigate = useNavigate()
@@ -15,28 +16,11 @@ export default function Login(): JSX.Element {
     const [showErrorCuentaNoExiste, setShowErrorCuentaNoExiste] = useState(false)
     const [showErrorPassword, setShowErrorPassword] = useState(false)
     const [showSpinner, setShowSpinner] = useState(false)
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = handleSubmit(async(data) => {
         setShowSpinner(true)
-        const usuario: UserLogin = {
-            userName: data.userName,
-            email: data.email,
-            password: data.password,
-        }
-        if (usuario.email==='') usuario.email='prueba@gmail.com'
-        const headersList = {
-            "Accept": "*/*",
-            "User-Agent": "Agroland",
-            "Content-Type": "application/json"
-        }
-        const bodyContent = JSON.stringify(usuario)
-        const URL = import.meta.env.VITE_AGROLAND_BACKEND_URL + '/usuarios/login'
-        const response = await fetch(URL, { 
-            method: "POST",
-            body: bodyContent,
-            headers: headersList
-        })
+        const response = await loginUser(data.userName, data.email, data.password)
         if (response.status===201) {
             setShowSpinner(false)
             setShowBienVenido(true)

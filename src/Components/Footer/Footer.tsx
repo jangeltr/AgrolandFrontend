@@ -5,7 +5,7 @@ export default function Footer(): JSX.Element {
                 <div className="lg:flex lg:items-start lg:justify-between">
                     <div>
                         <div className="flex justify-center items-center text-green-600 lg:justify-start">
-                            <img src="/public/logo.png" alt="Logotipo" className=" h-10"/>
+                            <img src="/public/logo2.png" alt="Logotipo" className=" h-10"/>
                             <span className=" text-2xl font-bold ml-2">Agroland</span>                
                         </div>
                         <p className="mx-auto mt-5 max-w-md text-center leading-relaxed text-gray-500 lg:text-left">

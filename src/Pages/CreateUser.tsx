@@ -2,7 +2,8 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { NewUser, User } from '../Common/UserType';
+import { User } from '../Common/UserType';
+import { createUser } from '../Common/Users';
 import { MyContext } from '../Context/context';
 import { Success, Reject } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
@@ -21,28 +22,12 @@ export default function CreateUser(): JSX.Element {
     
     const onSubmit = handleSubmit(async(data) => {
         setShowSpinner(true)
-        const usuario: NewUser = {
-            userName: data.userName,
-            email: data.email,
-            password: data.password,
-            nombre: data.nombre
-        }
-        const headersList = {
-            "Accept": "*/*",
-            "User-Agent": "Agroland",
-            "Content-Type": "application/json"
-        }
-        const bodyContent = JSON.stringify(usuario)
-        const URL = import.meta.env.VITE_AGROLAND_BACKEND_URL + '/usuarios/createuser'
-        const response = await fetch(URL, { 
-            method: "POST",
-            body: bodyContent,
-            headers: headersList
-        });
+        const response = await createUser(data.userName, data.email, data.password, data.nombre)
         if (response.status===201) {
             setShowSpinner(false)
             setShowBienVenido(true)
             const data: User = await response.json()
+            console.log(data)
             setTimeout(() => {
                 contexto?.updateData({user: data})
                 navigate('/home')

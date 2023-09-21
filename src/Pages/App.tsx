@@ -11,6 +11,7 @@ import Cultivos from './Cultivos';
 import Predios from './Predios';
 import Usuarios from './Usuarios';
 import Otros from './Otros';
+import { createFirstUser } from '../Common/Users';
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
@@ -45,6 +46,7 @@ const AppRoutesWithoutUser = () => {
 }
 
 export default function App() {
+    (async ()=> await createFirstUser())()
     const contexto = useContext(MyContext)
     function enrutar(){
         if (contexto?.data.user===null) {
@@ -57,7 +59,6 @@ export default function App() {
         }
     }
     return (
-        
         <>
             <BrowserRouter>
                 <Layout>
