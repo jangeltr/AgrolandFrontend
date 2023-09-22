@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { User, UserLogin } from '../Common/UserType';
+import { User } from '../Common/UserType';
 import { MyContext } from '../Context/context';
 import { Success, Reject } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
@@ -21,8 +21,8 @@ export default function Login(): JSX.Element {
     const onSubmit = handleSubmit(async(data) => {
         setShowSpinner(true)
         const response = await loginUser(data.userName, data.email, data.password)
+        setShowSpinner(false)
         if (response.status===201) {
-            setShowSpinner(false)
             setShowBienVenido(true)
             const data: User = await response.json()
             setTimeout(() => {

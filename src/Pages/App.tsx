@@ -1,17 +1,18 @@
 import '../App.css'
 import { useRoutes, BrowserRouter } from 'react-router-dom'
-import { useContext } from 'react';
+import { useContext, useState } from 'react'
 
-import { MyContext } from '../Context/context';
+import { MyContext } from '../Context/context'
 import Layout from '../Components/Layout'
-import Home from './Home';
-import Login from './Login';
-import CreateUser from './CreateUser';
-import Cultivos from './Cultivos';
-import Predios from './Predios';
-import Usuarios from './Usuarios';
-import Otros from './Otros';
-import { createFirstUser } from '../Common/Users';
+import Home from './Home'
+import Login from './Login'
+import CreateUser from './CreateUser'
+import Cultivos from './Cultivos'
+import Predios from './Predios'
+import Usuarios from './Usuarios'
+import Otros from './Otros'
+import { createFirstUser } from '../Common/Users'
+import { RejectConnectBD } from '../Components/Alerts';
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
@@ -46,8 +47,11 @@ const AppRoutesWithoutUser = () => {
 }
 
 export default function App() {
-    (async ()=> await createFirstUser())()
+    const [showErrorBD, setShowErrorBD] = useState(false)
     const contexto = useContext(MyContext)
+    createFirstUser().then((res)=>{
+        if (res==='Error') setShowErrorBD(true)
+    })
     function enrutar(){
         if (contexto?.data.user===null) {
                 return <AppRoutesWithoutUser />
@@ -62,9 +66,12 @@ export default function App() {
         <>
             <BrowserRouter>
                 <Layout>
-                    {enrutar()}
+                    {
+                        enrutar() 
+                    }
                 </Layout>
             </BrowserRouter>
+            <RejectConnectBD show={showErrorBD} title='Error' text='Error al intentar conectarse a la BD de usuarios' setShow={setShowErrorBD}/>
         </>
     )
 }

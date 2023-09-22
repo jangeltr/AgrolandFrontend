@@ -23,18 +23,18 @@ export default function CreateUser(): JSX.Element {
     const onSubmit = handleSubmit(async(data) => {
         setShowSpinner(true)
         const response = await createUser(data.userName, data.email, data.password, data.nombre)
+        setShowSpinner(false)
         if (response.status===201) {
-            setShowSpinner(false)
             setShowBienVenido(true)
             const data: User = await response.json()
-            console.log(data)
             setTimeout(() => {
                 contexto?.updateData({user: data})
                 navigate('/home')
             }, 2000);
         }else if (response.status===400)
-            {   const res= await response.json()
-                if (typeof res.message=='string' && res.message.includes('ya existen'))
+            {
+                const res= await response.json()
+                if (typeof res.message=='string' && res.message.includes('ya existe'))
                     setShowErrorCuentaYaExiste(true)
                 else if (typeof res.message=='object')
                         setShowErrorPassword(true)

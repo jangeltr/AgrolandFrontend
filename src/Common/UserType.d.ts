@@ -24,6 +24,7 @@ export interface NewUser {
 }
 
 export interface UserLogin {
+    App: string
     userName: string
     email: string
     password: string

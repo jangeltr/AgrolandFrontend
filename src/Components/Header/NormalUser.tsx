@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import { MyContext } from '../../Context/context';
+import { logoutUser } from '../../Common/Users';
 
 const navigation = [
     { name: 'Cultivos', href: '/cultivos', current: true },
@@ -81,6 +82,7 @@ export default function NormalUser() {
                                                         <a href={item.href} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200' 
                                                             onClick={()=> {
                                                                 if (item.name=='Salir')
+                                                                    if (contexto?.data?.user?.access_token) logoutUser(contexto.data.user.access_token)
                                                                     contexto?.updateData({user: null})
                                                                     navigate('/')
                                                             }}
