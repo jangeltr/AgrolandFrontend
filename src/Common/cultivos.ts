@@ -15,3 +15,16 @@ export async function cultivos(){
     })
     return response
 }
+
+export async function getApiGoogleMapsKey(token: string){
+    const URL = BackendUrl + '/predios/getApiGoogleMapsKey'
+    const headers = {
+        "Authorization": "Bearer " + token,
+        ...headersList
+    }
+    const response = await fetch(URL, { 
+        method: "GET",
+        headers
+    })
+    return response
+}

@@ -85,7 +85,7 @@ export default function AdminUser() {
                                                             onClick={()=> {
                                                                 if (item.name=='Salir')
                                                                     if (contexto?.data?.user?.access_token) logoutUser(contexto.data.user.access_token)
-                                                                    contexto?.updateData({user: null})
+                                                                    contexto?.updateData({user: null, googleMapsApiKey: null})
                                                                     navigate('/')
                                                             }}
                                                         >

@@ -4,10 +4,11 @@ import { useForm } from 'react-hook-form';
 
 import { User } from '../Common/UserType';
 import { MyContext } from '../Context/context';
-import { Success, Reject } from '../Components/Alerts';
+import { Success, Reject, RejectConnectBD } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
 import { inputEmailLogin, inputPassword, inputUserNameLogin } from '../Common/FormInputObjects';
 import { loginUser } from '../Common/Users';
+import { getApiGoogleMapsKey } from '../Common/cultivos';
 
 export default function Login(): JSX.Element {
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ export default function Login(): JSX.Element {
     const [showErrorCuentaNoExiste, setShowErrorCuentaNoExiste] = useState(false)
     const [showErrorPassword, setShowErrorPassword] = useState(false)
     const [showSpinner, setShowSpinner] = useState(false)
+    const [showErrorConnectBD, setShowErrorConnectBD] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     const onSubmit = handleSubmit(async(data) => {
@@ -23,12 +25,16 @@ export default function Login(): JSX.Element {
         const response = await loginUser(data.userName, data.email, data.password)
         setShowSpinner(false)
         if (response.status===201) {
-            setShowBienVenido(true)
-            const data: User = await response.json()
-            setTimeout(() => {
-                contexto?.updateData({user: data})
-                navigate('/home')
-            }, 2000);
+            const user: User = await response.json()
+            const res = await getApiGoogleMapsKey(user.access_token)
+            if (res.status===200){
+                setShowBienVenido(true)
+                const googleMapsApiKey = await res.text()
+                setTimeout(() => {
+                    contexto?.updateData({ user, googleMapsApiKey })
+                    navigate('/home')
+                }, 2000);
+            }else setShowErrorConnectBD(true)
         }else if (response.status===400)
             {   const res= await response.json()
                 if (typeof res.message=='string' && res.message.includes('no existe'))
@@ -93,6 +99,7 @@ export default function Login(): JSX.Element {
             <Success show={showBienVenido} title='Agroland' text={'Bienvenido'} setShow={setShowBienVenido}/>
             <Reject show={showErrorCuentaNoExiste} title='Error al iniciar sesion' text='La cuenta no existe' setShow={setShowErrorCuentaNoExiste}/>
             <Reject show={showErrorPassword} title='Error al iniciar sesion' text='Contraseña incorrecta' setShow={setShowErrorPassword}/>
+            <RejectConnectBD show={showErrorConnectBD} title='Error' text='No se pudo conectar a la BD Agroland' setShow={setShowErrorConnectBD}/>
         </>
     )
 }

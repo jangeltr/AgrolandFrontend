@@ -7,7 +7,6 @@ export interface User {
     rol: string
     createdAt: Date
     updatedAt: Date
-    googleMapsApiKey: string
     perfil: object
     permisos: object
 }

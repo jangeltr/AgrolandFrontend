@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { User } from '../Common/UserType';
 import { createUser } from '../Common/Users';
 import { MyContext } from '../Context/context';
-import { Success, Reject } from '../Components/Alerts';
+import { Success, Reject, RejectConnectBD } from '../Components/Alerts';
 import { MySpinner } from '../Components/Spinner';
 import { inputEmail, inputPassword, inputNombre, inputUserName } from '../Common/FormInputObjects';
-
+import { getApiGoogleMapsKey } from '../Common/cultivos';
 
 export default function CreateUser(): JSX.Element {
     const contexto = useContext(MyContext)
@@ -18,6 +18,7 @@ export default function CreateUser(): JSX.Element {
     const [showErrorCuentaYaExiste, setShowErrorCuentaYaExiste] = useState(false)
     const [showErrorPassword, setShowErrorPassword] = useState(false)
     const [showSpinner, setShowSpinner] = useState(false)
+    const [showErrorConnectBD, setShowErrorConnectBD] = useState(false)
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     
     const onSubmit = handleSubmit(async(data) => {
@@ -25,12 +26,16 @@ export default function CreateUser(): JSX.Element {
         const response = await createUser(data.userName, data.email, data.password, data.nombre)
         setShowSpinner(false)
         if (response.status===201) {
-            setShowBienVenido(true)
-            const data: User = await response.json()
-            setTimeout(() => {
-                contexto?.updateData({user: data})
-                navigate('/home')
-            }, 2000);
+            const user: User = await response.json()
+            const res = await getApiGoogleMapsKey(user.access_token)
+            if (res.status===200){
+                setShowBienVenido(true)
+                const googleMapsApiKey = await res.text()
+                setTimeout(() => {
+                    contexto?.updateData({user, googleMapsApiKey})
+                    navigate('/home')
+                }, 2000);
+            }else setShowErrorConnectBD(true)
         }else if (response.status===400)
             {
                 const res= await response.json()
@@ -125,6 +130,7 @@ export default function CreateUser(): JSX.Element {
             <Reject show={showErrorCrearCuenta} title='Error al crear la cuenta' text='Faltan datos o alguno no cumple los requisitos' setShow={setShowErrorCrearCuenta}/>
             <Reject show={showErrorCuentaYaExiste} title='Error al crear la cuenta' text='La cuenta de correo electronico ya existe' setShow={setShowErrorCuentaYaExiste}/>
             <Reject show={showErrorPassword} title='Error al crear la cuenta' text='La contraseña no reune los requisitos minimos de seguridad' setShow={setShowErrorPassword}/>
+            <RejectConnectBD show={showErrorConnectBD} title='Error' text='No se pudo conectar a la BD Agroland' setShow={setShowErrorConnectBD}/>
         </>
     )
 }
