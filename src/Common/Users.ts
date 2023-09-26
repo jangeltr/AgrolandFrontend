@@ -36,13 +36,9 @@ export async function createUser(userName: string, email:string, password: strin
         rol,
         perfil: {nombre},
     }
-    const bodyContent = JSON.stringify(usuario)
+    const body = JSON.stringify(usuario)
     const URL = BackendUrl + '/usuarios/createuser'
-    const response = await fetch(URL, { 
-        method: "POST",
-        body: bodyContent,
-        headers: headersList
-    })
+    const response = await fetch(URL, { method: "POST", body, headers: headersList })
     return response
 }
 

@@ -8,7 +8,7 @@ import { logoutUser } from '../../Common/Users';
 
 const navigation = [
     { name: 'Cultivos', href: '/cultivos', current: true },
-    { name: 'Predios', href: '/predios', current: false },
+    { name: 'Predios', href: '/predios/showPredios', current: false },
     { name: 'Usuarios', href: '/usuarios', current: false },
     { name: 'Otros', href: '/otros', current: false },
 ]

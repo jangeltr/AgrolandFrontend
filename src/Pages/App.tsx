@@ -8,18 +8,30 @@ import Home from './Home'
 import Login from './Login'
 import CreateUser from './CreateUser'
 import Cultivos from './Cultivos'
-import Predios from './Predios'
+import PrediosAdmin from './Predios/PrediosAdmin'
+import PrediosUser from './Predios/PrediosUser'
 import Usuarios from './Usuarios'
+import Predio from './Predios/Predio'
+import NewPredio from './Predios/NewPredio'
+import EditPredio from './Predios/EditPredio'
 import Otros from './Otros'
 import { createFirstUser } from '../Common/Users'
 import { RejectConnectBD } from '../Components/Alerts';
+import ShowPrediosAdmin from './Predios/ShowPrediosAdmin'
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
         { path: '/', element: <Home />},
         { path: '/home', element: <Home />},
         { path: '/cultivos', element: <Cultivos />},
-        { path: '/predios', element: <Predios />},
+        { path: '/predios', element: <PrediosAdmin />,
+            children: [
+                { path: 'showPredios', element: <ShowPrediosAdmin />},
+                { path: 'predio', element: <Predio />},
+                { path: 'newPredio', element: <NewPredio />},
+                { path: 'editPredio', element: <EditPredio />},
+            ]
+        },
         { path: '/usuarios', element: <Usuarios />},
         { path: '/otros', element: <Otros />}
     ])
@@ -31,7 +43,7 @@ const AppRoutesNormalUser = () => {
         { path: '/', element: <Home />},
         { path: '/home', element: <Home />},
         { path: '/cultivos', element: <Cultivos />},
-        { path: '/predios', element: <Predios />}
+        { path: '/predios', element: <PrediosUser />}
     ])
     return routes
 }
@@ -56,10 +68,10 @@ export default function App() {
         if (contexto?.data.user===null) {
                 return <AppRoutesWithoutUser />
         } else {
-            if (contexto?.data?.user?.rol==='Cliente')
-                return <AppRoutesNormalUser />
-            else
+            if (contexto?.data?.user?.rol==='Administrador')
                 return <AppRoutesAdminUser />
+            else
+                return <AppRoutesNormalUser />
         }
     }
     return (
