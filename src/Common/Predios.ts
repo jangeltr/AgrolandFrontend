@@ -1,4 +1,3 @@
-import { Predio } from "./PredioTypes"
 import { Coordenada } from "./PredioTypes"
 import { Propietario } from "./PredioTypes"
 import { NewPredio } from "./PredioTypes"
@@ -21,10 +20,11 @@ export async function getPredios(token: string | undefined = ""){
     return response
 }
 
-export async function newPredio(nombre: string, ubicacion: string, extension: number, coordenadas: Coordenada[], propietario: Propietario, token: string | undefined = ""){
+export async function newPredio(nombre: string, estado: string, municipio: string, extension: number, coordenadas: Coordenada[], propietario: Propietario, token: string | undefined = ""){
     const predio: NewPredio = {
         nombre,
-        ubicacion,
+        estado,
+        municipio,
         extension,
         coordenadas,
         propietario

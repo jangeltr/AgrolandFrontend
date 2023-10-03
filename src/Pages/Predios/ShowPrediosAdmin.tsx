@@ -56,8 +56,8 @@ export default function ShowPrediosAdmin(): JSX.Element {
                                     <h1 className=' text-secundary ml-4'>{predio.nombre}</h1>
                                 </div>
                                 <div className=' w-full flex'>
-                                    <h1 className=' text-principal'>Ubicacion: </h1>
-                                    <h1 className=' text-secundary ml-4'>{predio.ubicacion}</h1>
+                                    <h1 className=' text-principal'>Municipio: </h1>
+                                    <h1 className=' text-secundary ml-4'>{predio.municipio}</h1>
                                 </div>
                                 <div className=' w-full flex'>
                                     <h1 className=' text-principal'>Extension: </h1>

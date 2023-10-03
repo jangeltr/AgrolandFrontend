@@ -24,6 +24,13 @@ export const inputEmail = {
     },
 }
 
+export const inputTelefono = {
+    pattern: {
+        value: /^[0-9]{10}$/i,
+        message: 'El numero de telefono no es valido'
+    },
+}
+
 export const inputNombre = {
     required: {
         value: true,
@@ -69,5 +76,20 @@ export const inputUserNameLogin = {
     minLength: {
         value: 3,
         message: 'El nombre corto no puede ser menor a 3 caracteres'
+    },
+}
+/////////////////////////////////////////////////////////////Predio///////////////////////////////////////////////
+export const inputNombrePredio = {
+    required: {
+        value: true,
+        message: 'El nombre del predio es requerido'
+    },
+    maxLength: {
+        value: 100,
+        message: 'El nombre no puede ser mayor a 100 caracteres'
+    },
+    minLength: {
+        value: 5,
+        message: 'El nombre no puede ser menor a 5 caracteres'
     },
 }

@@ -7,8 +7,17 @@ const headersList = {
     "Content-Type": "application/json"
 }
 
-export async function municipios(estado:string){
-    const URL = BackendUrl + '/predios/getMunicipios?estado='+estado
+export async function getMunicipios(estado:string){
+    const URL = BackendUrl + '/predios/getMunicipiosFromEstado?estado='+estado
+    const response = await fetch(URL, { 
+        method: "GET",
+        headers: headersList
+    })
+    return response
+}
+
+export async function getEstados(){
+    const URL = BackendUrl + '/predios/getEstados'
     const response = await fetch(URL, { 
         method: "GET",
         headers: headersList

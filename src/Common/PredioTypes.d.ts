@@ -1,7 +1,7 @@
 export interface Propietario {
     nombre: string
-    telefono: string
-    email: string
+    telefono?: string
+    email?: string
 }
 
 interface Coordenada {
@@ -12,7 +12,8 @@ interface Coordenada {
 export interface Predio {
     _id: string
     nombre: string
-    ubicacion: string
+    estado: string
+    municipio: string
     extension: number
     coordenadas: Coordenada[]
     propietario: Propietario
@@ -20,7 +21,8 @@ export interface Predio {
 
 export interface NewPredio {
     nombre: string
-    ubicacion: string
+    estado: string
+    municipio: string
     extension: number
     coordenadas: Coordenada[]
     propietario: Propietario
