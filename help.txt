@@ -7,7 +7,7 @@ npm install
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
-////tailwind.config.cjs
+////tailwind.config.js
 module.exports = {
   content: [
     './pages/**/*.{html,js,ts,jsx,tsx}',
