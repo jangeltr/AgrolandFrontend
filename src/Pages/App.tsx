@@ -14,10 +14,10 @@ import Usuarios from './Usuarios'
 import Predio from './Predios/Predio'
 import NewPredio from './Predios/NewPredio'
 import EditPredio from './Predios/EditPredio'
-import Otros from './Otros'
 import { createFirstUser } from '../Common/Users'
 import { RejectConnectBD } from '../Components/Alerts';
 import ShowPrediosAdmin from './Predios/ShowPrediosAdmin'
+import ShowPrediosOnMap from './Predios/ShowPrediosOnMap'
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
@@ -27,13 +27,12 @@ const AppRoutesAdminUser = () => {
         { path: '/predios', element: <PrediosAdmin />,
             children: [
                 { path: 'showPredios', element: <ShowPrediosAdmin />},
-                { path: 'predio', element: <Predio />},
+                { path: 'showPrediosOnMap', element: <ShowPrediosOnMap />},
                 { path: 'newPredio', element: <NewPredio />},
                 { path: 'editPredio', element: <EditPredio />},
             ]
         },
         { path: '/usuarios', element: <Usuarios />},
-        { path: '/otros', element: <Otros />}
     ])
     return routes
 }
@@ -43,7 +42,11 @@ const AppRoutesNormalUser = () => {
         { path: '/', element: <Home />},
         { path: '/home', element: <Home />},
         { path: '/cultivos', element: <Cultivos />},
-        { path: '/predios', element: <PrediosUser />}
+        { path: '/predios', element: <PrediosUser />,
+            children: [
+                { path: 'predio', element: <Predio />},
+            ]
+        }            
     ])
     return routes
 }

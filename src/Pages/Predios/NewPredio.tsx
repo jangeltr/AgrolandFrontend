@@ -169,6 +169,9 @@ export default function NewPredio() {
         <>
             <div className='w-full flex items-center justify-center'>
                 <div className='w-full lg:max-w-5xl flex-col mb-8'>
+                    <div className=' w-full flex justify-center'>
+                        <label htmlFor="">Nuevo predio</label>
+                    </div>
                     <form onSubmit={onSubmit}>
                         <div className='w-full flex flex-wrap justify-around p-5'>
                             <div id="map1" className='w-full lg:w-2/3 p-2 h-96 bg-gray-100 rounded-lg shadow-lg'>
@@ -284,7 +287,7 @@ export default function NewPredio() {
                             </div>
                         </div>
                         <div className='mt-2 flex justify-center'>
-                            <button type='submit' className=' border-principal rounded-lg w-40 p-2 border-2 flex justify-around text-principal'>
+                            <button type='submit' className=' border-principal rounded-lg w-40 p-2 border-2 flex justify-around text-white bg-gray-700'>
                                 <SaveIcon/>Guardar
                             </button>
                         </div>

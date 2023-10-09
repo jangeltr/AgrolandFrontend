@@ -58,3 +58,10 @@ git push origin main
 //Para agregar algunos componentes de React del sitio de componentes de tailwindcss
  npm install @headlessui/react
  npm install @heroicons/react
+
+ //Para ejecutar el proyecto
+ npm run dev
+
+ //Para que responda en localhost y la IP
+ npx vite --host 0.0.0.0
+ 
