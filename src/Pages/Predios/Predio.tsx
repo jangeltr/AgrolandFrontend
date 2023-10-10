@@ -79,14 +79,6 @@ export default function Predio() {
     const onLoadPolygon = (poly: google.maps.Polygon) => {
         polygonRef.current = poly;
     }
-    // const onEditPolygon = () => {
-    //     if (polygonRef.current) {
-    //         const coords: Coords = polygonRef.current.getPath().getArray()
-    //             .map(latLng => ({ lat: latLng.lat(), lng: latLng.lng() }))
-    //         setPolygon(coords);
-    //     }
-    // }
-
     /////////////////////////////////////////// Return Componente //////////////////////////////////////////////////////////
     return isLoaded ? (
         <>
