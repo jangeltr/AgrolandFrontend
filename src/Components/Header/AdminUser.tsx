@@ -9,13 +9,12 @@ import { logoutUser } from '../../Common/Users';
 const navigation = [
     { name: 'Cultivos', href: '/cultivos', current: true },
     { name: 'Predios', href: '/predios/showPredios', current: false },
+    { name: 'Asignar (Predio-Cultivo)', href: '/asignarPredioCultivo', current: false },
     { name: 'Usuarios', href: '/usuarios', current: false },
-    { name: 'Otros', href: '/otros', current: false },
 ]
 
 const userMenu = [
     { name: 'Mis Datos', href: '#', current: true },
-    { name: 'Configuracion', href: '#', current: false },
     { name: 'Salir', href: '#', current: false },
 ]
 

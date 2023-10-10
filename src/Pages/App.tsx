@@ -18,6 +18,7 @@ import { createFirstUser } from '../Common/Users'
 import { RejectConnectBD } from '../Components/Alerts';
 import ShowPrediosAdmin from './Predios/ShowPrediosAdmin'
 import ShowPrediosOnMap from './Predios/ShowPrediosOnMap'
+import AsignarPredioCultivo from './Predios-Cultivo/asignarPredioCultivo'
 
 const AppRoutesAdminUser = () => {
     const routes = useRoutes([
@@ -30,8 +31,10 @@ const AppRoutesAdminUser = () => {
                 { path: 'showPrediosOnMap', element: <ShowPrediosOnMap />},
                 { path: 'newPredio', element: <NewPredio />},
                 { path: 'editPredio', element: <EditPredio />},
+                { path: 'predio', element: <Predio />}
             ]
         },
+        { path: '/asignarPredioCultivo', element: <AsignarPredioCultivo />},
         { path: '/usuarios', element: <Usuarios />},
     ])
     return routes

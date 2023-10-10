@@ -21,6 +21,7 @@ export default function ShowPrediosAdmin(): JSX.Element {
     const [municipio, setMunicipio] = useState<string | null>(null)
     const [hasEstado, setHasEstado] = useState<number>(0)
     const [hasMunicipio, setHasMunicipio] = useState<number>(0)
+    const [nPredios, setNPredios] = useState<number>(0)
     useEffect(() => {
         async function fetchData() {
             const responseEstados = await getEstados()
@@ -63,6 +64,7 @@ export default function ShowPrediosAdmin(): JSX.Element {
                 if (responsePredios.status==200) {
                     const data:Predio[]  = await responsePredios.json()
                     setPredios(data)
+                    setNPredios(data.length)
                 }else setShowError(true)
             }
         }
@@ -76,6 +78,9 @@ export default function ShowPrediosAdmin(): JSX.Element {
                         <h1 className=' text-secundary'>No hay predios registrados en este Municipio</h1>
                     </div>
             }
+            <div className=' w-full flex justify-center'>
+                <h1 className=' text-secundary'>{nPredios} Predios registrados</h1>
+            </div>
             <div className=' mt-5 mb-5 flex justify-center'>
                 <button className=' p-2 bg-gray-700 rounded-lg text-gray-200' onClick={()=>{navigate('/predios/newPredio')}}>
                     <h1 className=' text-secundary'>Agregar Predio</h1>

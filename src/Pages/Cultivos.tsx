@@ -7,7 +7,7 @@ export default function Cultivos() {
     const [showSpinner, setShowSpinner] = useState(true)
     const [showErrorBD, setShowErrorBD] = useState(false)
     const [allCultivos, setAllCultivos] = useState<Cultivo[]>([])
-    const [filterCultivos, setFilterCultivs] = useState<Cultivo[]>([])
+    const [filterCultivos, setFilterCultivos] = useState<Cultivo[]>([])
     useEffect(() => {
         async function fetchData() {
             const response = await cultivos()
@@ -15,7 +15,7 @@ export default function Cultivos() {
             if (response.status==200) {
                 const data:Cultivo[]  = await response.json()
                 setAllCultivos(data)
-                setFilterCultivs(data)
+                setFilterCultivos(data)
             }else{
                 setShowErrorBD(true)
             }
@@ -43,7 +43,7 @@ export default function Cultivos() {
                                 const filter = allCultivos.filter((cultivo) => {
                                     return cultivo.nombre.toLowerCase().indexOf(value.toLowerCase()) > -1
                                 })
-                                setFilterCultivs(filter)
+                                setFilterCultivos(filter)
                             }
                         }/>
                     </div>
