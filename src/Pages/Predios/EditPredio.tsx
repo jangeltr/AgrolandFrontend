@@ -160,7 +160,6 @@ export default function EditPredio() {
         predio.propietario = propietario
         const response = await updatePredio(predio, contexto?.data.user?.access_token)
         setShowSpinner(false)
-        console.log(response)
         if (response.status==200) {
             setShowPredioActualizado(true)
         }

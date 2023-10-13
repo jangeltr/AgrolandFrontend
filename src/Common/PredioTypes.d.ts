@@ -9,6 +9,10 @@ interface Coordenada {
     lng: number
 }
 
+interface cultivo {
+    cultivo: string
+    año: number
+}
 export interface Predio {
     _id: string
     nombre: string
@@ -17,6 +21,7 @@ export interface Predio {
     extension: number
     coordenadas: Coordenada[]
     propietario: Propietario
+    cultivos: cultivo[]
 }
 
 export interface NewPredio {
