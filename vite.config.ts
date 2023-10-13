@@ -9,7 +9,10 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [react()],
     server: {
+      // host: env.VITE_AGROLAND_FRONTEND_URL,
       port: env.VITE_AGROLAND_FRONTEND_PORT,
+      // origin: env.VITE_AGROLAND_FRONTEND_URL + ':' + env.VITE_AGROLAND_FRONTEND_PORT,
+      origin: '*',
     }
   }
 })
