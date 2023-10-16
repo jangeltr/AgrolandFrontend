@@ -73,12 +73,22 @@ export async function createFirstUser(){
     return "OK"
 }
 
-export async function logoutUser(token: string){
+export async function logoutUser(token: string | undefined = ""){
     const URL = BackendUrl + '/usuarios/logout'
     const headers = {
         "Authorization": "Bearer " + token,
         ...headersList
     }
     const response = await fetch(URL, { method: "POST", headers})
+    return response
+}
+
+export async function getUsers(Page: number, token: string | undefined = ""){
+    const URL = BackendUrl + '/usuarios/getUsers?App='+App+'&Page='+Page
+    const headers = {
+        "Authorization": "Bearer " + token,
+        ...headersList
+    }
+    const response = await fetch(URL, { method: "GET", headers})
     return response
 }

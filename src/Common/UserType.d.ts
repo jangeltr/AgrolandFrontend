@@ -1,5 +1,4 @@
-export interface User {
-    access_token: string
+export interface Usuario {
     _id: string
     email: string
     userName: string
@@ -7,10 +6,15 @@ export interface User {
     rol: string
     createdAt: Date
     updatedAt: Date
-    perfil: object
+    perfil: {
+        nombre: string
+    }
     permisos: object
 }
 
+export interface User extends Usuario {
+    access_token: string
+}
 export interface NewUser {
     App: string
     userName: string
