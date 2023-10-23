@@ -48,11 +48,9 @@ const AppRoutesNormalUser = () => {
         { path: '/home', element: <Home />},
         { path: '/cultivos', element: <Cultivos />},
         { path: '/misDatos', element: <MisDatos />},
-        { path: '/predios', element: <PrediosUser />,
-            children: [
-                { path: 'predio', element: <Predio />},
-            ]
-        }            
+        { path: '/predios/showPrediosOnMap', element: <ShowPrediosOnMap />},
+        { path: '/predios/predio', element: <Predio />},
+        { path: '/predios', element: <PrediosUser />}           
     ])
     return routes
 }

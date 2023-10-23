@@ -5,7 +5,7 @@ export default function MisDatos() {
     const contexto = useContext(MyContext)
     return (
         <div className=' w-full flex justify-center'>
-            <div className=" max-w-7xl flex-col w-full text-gray-800 mt-5 w-96">
+            <div className=" max-w-7xl flex-col text-gray-800 mt-5 w-96">
                 <div className="flex justify-center">
                     <h1 className=' text-2xl text-gray-900'>Mis Datos</h1>
                 </div>

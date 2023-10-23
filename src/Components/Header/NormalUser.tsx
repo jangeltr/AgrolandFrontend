@@ -11,7 +11,7 @@ const navigation = [
     { name: 'Predios', href: '/predios', current: false },
 ]
 const userMenu = [
-    { name: 'Mis Datos', href: '#', current: true },
+    { name: 'Mis Datos', href: '/misDatos', current: true },
     { name: 'Salir', href: '#', current: false },
 ]
 
@@ -79,16 +79,17 @@ export default function NormalUser() {
                                             {
                                                 userMenu.map((item) => (
                                                     <Menu.Item key={item.name}>
-                                                        <a href={item.href} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200' 
+                                                        <NavLink to={item.href} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200'
                                                             onClick={()=> {
-                                                                if (item.name=='Salir')
-                                                                    if (contexto?.data?.user?.access_token) logoutUser(contexto.data.user.access_token)
+                                                                if (item.name=='Salir') {
+                                                                    logoutUser(contexto?.data?.user?.access_token)
                                                                     contexto?.updateData({user: null, googleMapsApiKey: null})
                                                                     navigate('/')
+                                                                }
                                                             }}
                                                         >
                                                             {item.name}
-                                                        </a>
+                                                        </NavLink>
                                                     </Menu.Item>
                                                 ))
                                             }
