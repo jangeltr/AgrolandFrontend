@@ -64,4 +64,14 @@ git push origin main
 
  //Para que responda en localhost y la IP
  npx vite --host 0.0.0.0
+
+//Si marca error al correr la App en el server
+node:internal/errors:496
+    ErrorCaptureStackTrace(err);
+    ^
+
+Error: ENOSPC: System limit for number of file watchers reached, watch ....
+//Corregir corriendo este comando y luego ejecutar la App
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
  
